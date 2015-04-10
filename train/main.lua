@@ -14,10 +14,10 @@ require("data")
 require("model")
 require("train")
 require("test")
-require("mui")
+--require("mui")
 
 -- Configurations
-dofile("config.lua")
+dofile("config_big.lua")
 
 -- Prepare random number generator
 math.randomseed(os.time())
@@ -30,8 +30,8 @@ main = {}
 function main.main()
    -- Setting the device
    if config.main.device then
-      cutorch.setDevice(config.main.device)
-      print("Device set to "..config.main.device)
+      --cutorch.setDevice(config.main.device)
+      --print("Device set to "..config.main.device)
    end
 
    main.clock = {}
@@ -48,11 +48,13 @@ function main.argparse()
 
    -- Options
    cmd:option("-resume",0,"Resumption point in epoch. 0 means not resumption.")
+   cmd:option("--devid",100,"Device ID.")
    cmd:text()
-   
    -- Parse the option
    local opt = cmd:parse(arg or {})
    
+   cutorch.setDevice(opt.devid)
+   print("Device set to "..opt.devid)
    -- Resumption operation
    if opt.resume > 0 then
       -- Find the main resumption file
@@ -120,8 +122,8 @@ function main.new()
    end
 
    -- The visualization
-   main.mui = Mui{width=config.mui.width,scale=config.mui.scale,n=config.mui.n,title="Model Visualization"}
-   main.draw()
+   --main.mui = Mui{width=config.mui.width,scale=config.mui.scale,n=config.mui.n,title="Model Visualization"}
+   --main.draw()
    collectgarbage()
 end
 
@@ -270,7 +272,7 @@ function main.trainlog(train)
 	    ", osd: "..string.format("%.2e",train.old_grads:std())..
 	    ", omi: "..string.format("%.2e",train.old_grads:min())..
 	    ", omx: "..string.format("%.2e",train.old_grads:max())
-	 main.draw()
+	 --main.draw()
       end
       
       if config.main.details or config.main.debug then

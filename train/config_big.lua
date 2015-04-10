@@ -27,34 +27,34 @@ config.train_data.batch_size = 128
 -- The model
 config.model = {}
 -- #alphabet x 1014
-config.model[1] = {module = "nn.TemporalConvolution", inputFrameSize = #alphabet, outputFrameSize = 256, kW = 7}
+config.model[1] = {module = "nn.TemporalConvolution", inputFrameSize = #alphabet, outputFrameSize = 512, kW = 7}
 config.model[2] = {module = "nn.Threshold"}
 config.model[3] = {module = "nn.TemporalMaxPooling", kW = 3, dW = 3}
--- 336 x 256
-config.model[4] = {module = "nn.TemporalConvolution", inputFrameSize = 256, outputFrameSize = 256, kW = 7}
+-- 336 x 512
+config.model[4] = {module = "nn.TemporalConvolution", inputFrameSize = 512, outputFrameSize = 512, kW = 7}
 config.model[5] = {module = "nn.Threshold"}
 config.model[6] = {module = "nn.TemporalMaxPooling", kW = 3, dW = 3}
--- 110 x 256
-config.model[7] = {module = "nn.TemporalConvolution", inputFrameSize = 256, outputFrameSize = 256, kW = 3}
+-- 110 x 512
+config.model[7] = {module = "nn.TemporalConvolution", inputFrameSize = 512, outputFrameSize = 512, kW = 3}
 config.model[8] = {module = "nn.Threshold"}
--- 108 x 256
-config.model[9] = {module = "nn.TemporalConvolution", inputFrameSize = 256, outputFrameSize = 256, kW = 3}
+-- 108 x 512
+config.model[9] = {module = "nn.TemporalConvolution", inputFrameSize = 512, outputFrameSize = 512, kW = 3}
 config.model[10] = {module = "nn.Threshold"}
--- 106 x 256
-config.model[11] = {module = "nn.TemporalConvolution", inputFrameSize = 256, outputFrameSize = 256, kW = 3}
+-- 106 x 512
+config.model[11] = {module = "nn.TemporalConvolution", inputFrameSize = 512, outputFrameSize = 512, kW = 3}
 config.model[12] = {module = "nn.Threshold"}
--- 104 x 256
-config.model[13] = {module = "nn.TemporalConvolution", inputFrameSize = 256, outputFrameSize = 256, kW = 3}
+-- 104 x 512
+config.model[13] = {module = "nn.TemporalConvolution", inputFrameSize = 512, outputFrameSize = 512, kW = 3}
 config.model[14] = {module = "nn.Threshold"}
 config.model[15] = {module = "nn.TemporalMaxPooling", kW = 3, dW = 3}
--- 34 x 256
-config.model[16] = {module = "nn.Reshape", size = 8704}
+-- 34 x 512
+config.model[16] = {module = "nn.Reshape", size = 17408}
 -- 8704
-config.model[17] = {module = "nn.Linear", inputSize = 8704, outputSize = 1024}
+config.model[17] = {module = "nn.Linear", inputSize = 17408, outputSize = 2048}
 config.model[18] = {module = "nn.Threshold"}
 config.model[19] = {module = "nn.Dropout", p = 0.5}
 -- 1024
-config.model[20] = {module = "nn.Linear", inputSize = 1024, outputSize = 1024}
+config.model[20] = {module = "nn.Linear", inputSize = 2048, outputSize = 1024}
 config.model[21] = {module = "nn.Threshold"}
 config.model[22] = {module = "nn.Dropout", p = 0.5}
 -- 1024
